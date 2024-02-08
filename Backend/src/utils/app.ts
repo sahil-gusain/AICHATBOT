@@ -1,11 +1,14 @@
-import express from "express"
+import express from "express";
+import morgan from "morgan";
 import  dotenv from "dotenv";
+import appRouter from "../routes/index.js";
 
 dotenv.config();
 
 const app= express();
-const portno = process.env.PORT_NO;
+
 
 app.use(express.json());
-
+app.use(morgan("dev"));
+app.use("api/v1",appRouter);
 export default app;
