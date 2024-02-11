@@ -7,7 +7,7 @@ app.get('/hello',(req,res,next)=>{
 // app.listen(8000,()=>{console.log('server is open ')});
 connectToDatabase().then(()=>{
     app.listen(8000,()=>console.log("\nserver is open"))
-    disconnectToDatabase();
+    // disconnectToDatabase();
 }).catch((err)=>{console.log(err)});
 
 
