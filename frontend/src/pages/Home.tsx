@@ -1,10 +1,12 @@
-import React from 'react'
-
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+  console.log(useAuth()?.isLoggedIn)
   return (
-    
-    <div>Home</div>
+    <>
+      <div>Home</div>
+    </>
+   
   )
 }
 
