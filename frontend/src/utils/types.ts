@@ -16,3 +16,8 @@ export type navprop = {
     textColor:string;
     onClick?:() => Promise<void>;
 };
+export type inputprops={
+    name:string;
+    type:string;
+    label:string;
+};

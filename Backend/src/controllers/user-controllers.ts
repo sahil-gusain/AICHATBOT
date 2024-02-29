@@ -44,7 +44,7 @@ export const userSignup=async (req:Request,res:Response,next:NextFunction)=>{
                signed:true,
           })
 
-          return res.status(200).json({message:"ok"});
+          return res.status(200).json({message:"ok",name:checkuser.name,email:checkuser.email});
      }catch(error){
           return res.status(400).json({message:"error",cause:error.message});
      }
@@ -77,7 +77,9 @@ export const userLogin=async (req:Request,res:Response,next:NextFunction)=>{
                httpOnly:true,
                signed:true,
           })
-          return res.status(200).json({message:"ok"});
+          return res
+          .status(200)
+          .json({message:"ok",name:checkuser.name,email:checkuser.email});
      }catch(error){
           return res.status(400).json({message:"error",cause:error.message});
      }
