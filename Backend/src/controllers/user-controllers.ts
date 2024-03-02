@@ -33,7 +33,7 @@ export const userSignup=async (req:Request,res:Response,next:NextFunction)=>{
                signed:true, 
           })
           
-          const token = createToken(checkuser.id.tostring(),checkuser.email,"7d");
+          const token = createToken(user.id.toString(),user.email,"7d");
           const expires=new Date();
           expires.setDate(expires.getDate()+7)
           res.cookie(COOKIE_NAME,token,{
@@ -44,7 +44,7 @@ export const userSignup=async (req:Request,res:Response,next:NextFunction)=>{
                signed:true,
           })
 
-          return res.status(200).json({message:"ok",name:checkuser.name,email:checkuser.email});
+          return res.status(200).json({message:"ok",name:user.name,email:user.email});
      }catch(error){
           return res.status(400).json({message:"error",cause:error.message});
      }
@@ -84,3 +84,23 @@ export const userLogin=async (req:Request,res:Response,next:NextFunction)=>{
           return res.status(400).json({message:"error",cause:error.message});
      }
   }
+
+  export const verifyUser =async(
+     req:Request,
+     res:Response,
+     next:NextFunction
+  )=>{
+     try{
+          const user = await User.findById(res.locals.jwtData.id);
+          if(!user){
+               return res.status(401).send("User not registered OR Token broken");
+          }
+          if(user._id.toString()!== res.locals.jwtData.id){
+               return res.status(401).send("permissions didn't match");
+          }
+          return res.status(200).json({message:"OK",name:user.name,email:user.email})
+     }catch(error){
+          console.log(error);
+       return res.status(200).json({message:"ERROR",cause:error.message});
+     }
+  };
