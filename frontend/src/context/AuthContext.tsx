@@ -1,6 +1,6 @@
 import { ReactNode, createContext,useContext,useEffect,useState } from "react";
 import { User,UserAuth } from "../utils/types";
-import { loginUser,checkAuthStatus } from "../component/helpers/api-communicator";
+import { loginUser,checkAuthStatus } from "../helpers/api-communicator";
 
 
 const AuthContext = createContext<UserAuth|null>(null);
