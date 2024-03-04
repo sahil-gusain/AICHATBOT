@@ -21,3 +21,7 @@ export type inputprops={
     type:string;
     label:string;
 };
+export type Message ={
+    role : "user"|"assistant";
+    content:string;
+}
