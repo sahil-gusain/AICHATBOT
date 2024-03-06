@@ -1,9 +1,10 @@
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import red from "@mui/material/colors/red"
 import { useRef, useState } from "react";
 import { Message } from "../utils/types";
 import ChatItem from "../component/chat/ChatItem";
+import { IoMdSend } from "react-icons/io";
 const Chat = () => {
   const auth=useAuth();
   const handleDeleteChats= ()=>{
@@ -11,6 +12,9 @@ const Chat = () => {
   }
   const inputRef=useRef<HTMLInputElement|null>(null);
   const [chatMessages,setChatMessages] = useState<Message[]>([])
+  const handleSubmit=()=>{
+    console.log("form submitted")
+  }
   return (
    <Box 
      sx={{
@@ -109,6 +113,31 @@ const Chat = () => {
 
               ))}
             </Box>
+            <div
+              style={{
+                width:"100%",
+                borderRadius:8,
+                backgroundColor:"rgb(17,27,39)",
+                display:"flex",
+                margin:"auto",
+              }}>
+                {" "}
+                <input
+                  ref={inputRef}
+                  type="text"
+                  style={{
+                    width:"100%",
+                    backgroundColor:"transparent",
+                    padding:"30px",
+                    border:"none",
+                    color:"white",
+                    fontSize:"20px",
+                  }}
+                />
+                <IconButton onClick={handleSubmit} sx={{color:"white",mx:1}}>
+                  <IoMdSend/>
+                </IconButton>
+              </div>
          </Box>
     </Box>
   )
