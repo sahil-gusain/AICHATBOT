@@ -5,15 +5,23 @@ import { useRef, useState } from "react";
 import { Message } from "../utils/types";
 import ChatItem from "../component/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
+
 const Chat = () => {
   const auth=useAuth();
+  const inputRef=useRef<HTMLInputElement|null>(null);
   const handleDeleteChats= ()=>{
     console.log("chat is deleted");
   }
-  const inputRef=useRef<HTMLInputElement|null>(null);
+  
   const [chatMessages,setChatMessages] = useState<Message[]>([])
-  const handleSubmit=()=>{
-    console.log("form submitted")
+  const handleSubmit=async()=>{
+    const content =inputRef.current?.value as string;
+    if(inputRef && inputRef.current){
+      inputRef.current.value="";
+    }
+    const newMessage:Message = {role:"user",content};
+    setChatMessages((prev)=>[...prev,newMessage]);
+    console.log(setChatMessages);
   }
   return (
    <Box 
