@@ -1,13 +1,15 @@
 import { Avatar, Box, Button, IconButton, Typography } from "@mui/material";
 import { useAuth } from "../context/AuthContext";
 import red from "@mui/material/colors/red"
-import { useRef, useState } from "react";
+import { useRef, useState,useEffect } from "react";
 import { Message } from "../utils/types";
 import ChatItem from "../component/chat/ChatItem";
 import { IoMdSend } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const Chat = () => {
   const auth=useAuth();
+  const navigate = useNavigate();
   const inputRef=useRef<HTMLInputElement|null>(null);
   const handleDeleteChats= ()=>{
     console.log("chat is deleted");
@@ -23,6 +25,12 @@ const Chat = () => {
     setChatMessages((prev)=>[...prev,newMessage]);
     console.log(setChatMessages);
   }
+  useEffect(() => {
+    console.log(auth?.isLoggedIn)
+    if (!auth?.isLoggedIn) {
+      return navigate("/login");
+    }
+  }, [auth]);
   return (
    <Box 
      sx={{
